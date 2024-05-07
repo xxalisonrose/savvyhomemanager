@@ -1,4 +1,6 @@
 /*
+House Tracker
+
 To do if there is time: 
 
     - Create a function to remove a home

@@ -1,3 +1,5 @@
+// Task Boxes
+
 import React from 'react';
 import bathroom from './images/bathroom-cleaning-housekeeping-toilet-svgrepo-com.svg';
 import bed from './images/bed-single-svgrepo-com.svg';
