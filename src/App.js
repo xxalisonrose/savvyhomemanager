@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import HouseTracker from './HouseTracker';
+import TaskBoxes from './TaskBoxes';
 
-function App() {
+const App = () => {
+  const [selectedHome, setSelectedHome] = useState(null);
+
+  const handleHomeClick = (home) => {
+    setSelectedHome(home); // Update selected home when a home is clicked
+  };
+
+  const handleBackClick = () => {
+    setSelectedHome(null); // Reset selected home to go back to HouseTracker
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>SavvyHomeManager</h1>
+      
+      {/* Render HouseTracker or TaskBoxes based on selectedHome */}
+      {selectedHome ? (
+        <TaskBoxes home={selectedHome} onBackClick={handleBackClick} />
+      ) : (
+        <HouseTracker onHomeClick={handleHomeClick} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
