@@ -55,7 +55,7 @@ const HouseTracker = ({ onHomeClick }) => {
             value={newHomeName}
             onChange={(e) => setNewHomeName(e.target.value)}
           />
-          <button onClick={handleAddHome}>Add Home</button>
+          <button onClick={handleAddHome} className="add-button">Add Home</button>
         </div>
       </div>
     </div>

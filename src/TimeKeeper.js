@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-const TimeDisplay = () => {
+const TimeKeeper = () => {
   const [currentTime, setCurrentTime] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -28,8 +28,7 @@ const TimeDisplay = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Date Logged:</h2>
+    <div className='TimeKeeper'>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -39,4 +38,4 @@ const TimeDisplay = () => {
   );
 };
 
-export default TimeDisplay;
+export default TimeKeeper;

@@ -1,33 +1,33 @@
-// Task Notes
-import React from 'react';
-import { useState } from 'react';
-import notebook from './images/notebook-svgrepo-com.svg';
+import React, { useState } from 'react';
+import TimeKeeper from './TimeKeeper';
 
-const EntryForm = ({ addEntry }) => {
+const TaskNotes = ({ addEntry }) => {
   const [text, setText] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text.trim() !== '') {
-      addEntry({ text, date: new Date().toLocaleString() });
-      setText('');
-    }
+    // Always add the entry, even if text is empty
+    addEntry({ text, date: new Date().toLocaleString() });
+    setText(''); // Clear the text input after submission
   };
 
   return (
     <form onSubmit={handleSubmit}>
-        <img src={notebook} alt="Task Icon" className="task-icon" />
+      
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Write your entry..."
+        placeholder="Optional Notes Section"
         rows={5}
         cols={50}
       />
       <br />
-      <button type="submit">Add Entry</button>
+      <TimeKeeper />
+      
+      <button type="submit" className='submit-button'>Update</button>
+      
     </form>
   );
 };
 
-export default EntryForm;
+export default TaskNotes;

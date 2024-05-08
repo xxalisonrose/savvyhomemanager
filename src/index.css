@@ -1,18 +1,20 @@
 body {
+  position: absolute;
+  max-width: 800px;
   margin: 3em;
   font-family: Verdana, sans-serif;
-  background-color: #c990f5; /* Default background color for body */
+  background-color: #c990f5;
 }
 
 h1 {
   text-align: center;
+  color: darkblue;
 }
 
-/* Styles for HouseTracker component */
+/* Styles for HouseTracker and TaskTracker components */
 
 .homes {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
@@ -25,11 +27,11 @@ h1 {
 }
 
 .location-box {
-  border: 3px solid #ccc;
+  border: 3px solid darkslateblue;
   border-radius: 8px;
   padding: 10px;
-  width: 100%; 
-  max-width: 200px; 
+  width: 145px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,6 +49,51 @@ h1 {
   font-weight: bold;
   margin-bottom: 8px;
   text-align: center;
+  color: darkblue;
+}
+
+.back-button {
+  background-color: lightblue; 
+  color: black;
+  font-weight: bolder;
+  padding: 10px;
+  border-radius: 4px;
+  display: block;
+  margin: auto;
+  left: 50%;
+  text-align: center;
+}
+
+.add-button,
+.submit-button {
+  background-color: lightblue; 
+  color: black;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 4px;
+  display: block;
+  margin-top: 2px;
+  left: 50%;
+  text-align: center;
+  
+}
+
+.btn-container {
+  margin-top: 5px;
+  text-align: center;
+}
+
+input[type=text] {
+  border: 2px solid darkslateblue;
+  border-radius: 4px;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+
+.TimeKeeper {
+  font-size: xx-small;
 }
 
 /* Media Queries for Responsive Design */
@@ -63,11 +110,20 @@ h1 {
   .boxes-container {
     grid-template-columns: repeat(3, 1fr); /* Three columns for medium screens */
   }
+
+  body {
+    left: 10%;
+    right: 10%;
+  }
 }
 
 @media only screen and (min-width: 1280px) {
   /* Adjustments for large screens (e.g., laptops and desktops) */
   .boxes-container {
     grid-template-columns: repeat(4, 1fr); /* Four columns for large screens */
+  }
+
+  body {
+    left: 20%;
   }
 }

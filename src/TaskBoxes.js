@@ -1,6 +1,16 @@
 // Task Boxes
 
+/* Future Goals
+- Fix colors of SVGs to match better -- not black
+- Add a box that will allow you to add your own task
+- Add a select group of tasks so the image will be there
+- Misc image for tasks that don't have an assigned image*/
+
 import React from 'react';
+import { useState } from 'react';
+import NotesList from './NotesList';
+
+//Images
 import bathroom from './images/bathroom-cleaning-housekeeping-toilet-svgrepo-com.svg';
 import bed from './images/bed-single-svgrepo-com.svg';
 import dishes from './images/dishes-svgrepo-com.svg';
@@ -20,28 +30,45 @@ const taskImageMapping = {
   "Clean Kitchen": dishes
 };
 
-function TaskBoxes({ onBackClick }) {
+function TaskBoxes({ onBackClick, onBackClickNotes }) {
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  const handleTaskClick = (task) => {
+    setSelectedTask(task);
+  };
+
   const handleBackClick = () => {
-    // Call the onBackClick callback provided by the parent component
+    setSelectedTask(null);
+    // provided by the parent
     onBackClick();
   };
 
   return (
-    <div className="homes">
-      <button onClick={handleBackClick} className="back-button">
-        Back to HouseTracker
-      </button>
-      <div className="boxes-container">
-        {TaskList.map((task, i) => (
-          <div key={i} className="location-box">
-            <img src={taskImageMapping[task]} alt="Task Icon" className="task-icon" />
-            <div className="box-content">
-              <div className="box-title">{task}</div>
-            </div>
+    <>
+      {selectedTask ? (
+        <NotesList task={selectedTask} onBackClick={onBackClickNotes} />
+      ) : (
+        <div className="homes">
+          <div className="boxes-container">
+            {TaskList.map((task, i) => (
+              <div key={i} className="location-box" onClick={() => handleTaskClick(task)}>
+                <img src={taskImageMapping[task]} alt="Task Icon" className="task-icon" />
+                <div className="box-content">
+                  <div className="box-title">{task}</div>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+      )}
+
+      <div className="btn-container">
+        <br /> {/* Line break */}
+        <button onClick={handleBackClick} className="back-button">
+          Return to Select a Different House
+        </button>
       </div>
-    </div>
+    </>
   );
 }
 
