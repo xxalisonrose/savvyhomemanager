@@ -1,36 +1,43 @@
-// List of Notes
-import React, { useState } from 'react';
-import TaskNotes from './TaskNotes'; // Import TaskNotes component for adding entries
+import React, { useState, useEffect } from 'react';
+import TaskNotes from './TaskNotes';
 
 const NotesList = ({ task, onBackClickNotes }) => {
-    const [entries, setEntries] = useState([]); // State to manage task entries
+  const [entries, setEntries] = useState(() => {
+    // Load entries from local storage if available, or initialize as an empty array
+    const savedEntries = localStorage.getItem(`entries_${task}`); // Use task name as part of the key
+    return savedEntries ? JSON.parse(savedEntries) : [];
+  });
   
-    const handleAddEntry = (newEntry) => {
-      setEntries([...entries, newEntry]); // Add new entry to the list of entries
-    };
-  
-    return (
-      <>
-        {/* Display task entries and add new entries using TaskNotes component */}
-        <h2>{task} Entries:</h2>
-        <ul>
-          {entries.map((entry, index) => (
-            <li key={index}>
-              <strong>{entry.date}</strong>: {entry.text}
-            </li>
-          ))}
-        </ul>
-  
-        {/* Render TaskNotes component for adding new entries */}
-        <TaskNotes addEntry={handleAddEntry} />
-  
-        {/* Back button to navigate back to TaskBoxes */}
-        <button onClick={onBackClickNotes} className="back-button">
-          Back to Task Selection
-        </button>
-      </>
-    );
+
+  // Update local storage whenever entries change
+  useEffect(() => {
+    localStorage.setItem(`entries_${task}`, JSON.stringify(entries));
+  }, [entries, task]);
+
+  const handleAddEntry = (newEntry) => {
+    const updatedEntries = [...entries, newEntry];
+    setEntries(updatedEntries);
   };
-  
+
+  return (
+    <>
+      <h2>{task} Entries:</h2>
+      <ul>
+        {entries.map((entry, index) => (
+          <li key={index}>
+            <strong>{entry.date}</strong>: {entry.text}
+          </li>
+        ))}
+      </ul>
+
+      <TaskNotes addEntry={handleAddEntry} />
+
+      {/* Back button to navigate back to TaskBoxes */}
+      <button onClick={onBackClickNotes} className="back-button">
+        Back to Task Selection
+      </button>
+    </>
+  );
+};
 
 export default NotesList;
