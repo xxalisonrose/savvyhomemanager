@@ -46,7 +46,7 @@ const App = () => {
       {selectedTask && (
         <NotesList task={selectedTask} onBackClickNotes={handleSelectedTaskBackClick} />
       )}
-  
+
       {!selectedHome && (
         <HouseTracker onHomeClick={handleHomeClick} />
       )}

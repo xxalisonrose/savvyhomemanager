@@ -30,7 +30,8 @@ const taskImageMapping = {
   "Clean Kitchen": dishes
 };
 
-function TaskBoxes({ onBackClick, onBackClickNotes }) {
+
+const TaskBoxes = ({ onBackClick, onBackClickNotes }) => {
   const [selectedTask, setSelectedTask] = useState(null);
 
   const handleTaskClick = (task) => {
@@ -39,19 +40,18 @@ function TaskBoxes({ onBackClick, onBackClickNotes }) {
 
   const handleBackClick = () => {
     setSelectedTask(null);
-    // provided by the parent
-    onBackClick();
+    onBackClick(); // Call the provided onBackClick function
   };
 
   return (
     <>
       {selectedTask ? (
-        <NotesList task={selectedTask} onBackClick={onBackClickNotes} />
+        <NotesList task={selectedTask} onBackClickNotes={onBackClickNotes} />
       ) : (
         <div className="homes">
           <div className="boxes-container">
-            {TaskList.map((task, i) => (
-              <div key={i} className="location-box" onClick={() => handleTaskClick(task)}>
+            {TaskList.map((task, index) => (
+              <div key={index} className="location-box" onClick={() => handleTaskClick(task)}>
                 <img src={taskImageMapping[task]} alt="Task Icon" className="task-icon" />
                 <div className="box-content">
                   <div className="box-title">{task}</div>
@@ -70,6 +70,6 @@ function TaskBoxes({ onBackClick, onBackClickNotes }) {
       </div>
     </>
   );
-}
+};
 
 export default TaskBoxes;

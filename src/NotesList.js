@@ -19,6 +19,12 @@ const NotesList = ({ task, onBackClickNotes }) => {
     setEntries(updatedEntries);
   };
 
+
+
+  const handleBackClickNotes = () => {
+    console.log("Back button clicked");
+  }
+
   return (
     <>
       <h2>{task} Entries:</h2>
@@ -33,7 +39,7 @@ const NotesList = ({ task, onBackClickNotes }) => {
       <TaskNotes addEntry={handleAddEntry} />
 
       {/* Back button to navigate back to TaskBoxes */}
-      <button onClick={onBackClickNotes} className="back-button">
+      <button onClick={handleBackClickNotes} className="back-button">
         Back to Task Selection
       </button>
     </>
